@@ -1,0 +1,38 @@
+\chapter{Introduzione alle virtual private networks}  % capitolo 15
+
+\section{Openvpn 2.X}
+OpenVPN è un software "full-featured SSL VPN" che implementa una rete sicura a layer OSI 2 o 3 usando il protocollo standard SSL/TLS, supporta diversi metodi di autenticazone ed è molto flessibile utilizzando certificati, smart cards, e/o credenziali con username/password, inoltre permette di abilitare policy per utenti o gruppi-specifici scrivendo specifiche regole di firewall sulla interfaccia della VPN. OpenVPN non è una web application o proxy e non lavora attraverso web browser. 
+
+In questa documentazione viene utilizzata la versione 2.X di OpenVPN, che espande le capacità di OpenVPN 1.X offrendo la scalabilità client/server e permettendo a più client di collegarsi allo stesso server OpenVPN.
+
+\section{Obbiettivo}
+Un utente dotato di una credenziale di accesso (certificato e software VPN) fornita dagli operatori che gestiscono il concentratore VPN si può collegare ai servizi interni della rete LAN. Una volta autentificato il sistema registrerà la sua connessione e si potrà monitorare la connessione attraverso l'indirizzo IP assegnato. Per un maggiore grado di controllo il traffico effettuato dall'utente verrà loggato.
+
+Il client collegato potrà simulare applicativi ed accedere a servizi come se fosse sulla rete locale.
+
+\section{Installazione software}
+L'installazione del software può essere fatta in diversi modi, utilizzando i gestori di pacchetti per la distribuzione scelta, installando i pacchetti a mano o utilizzando il codice sorgente.
+Nel nostro caso abbiamo utilizzato il gestore di pacchetti "aptitude" specifico per distribuzione Debian, l'interfaccia che compare permette di scegliere il pacchetto da installare e di risolvere le dipendenze.
+Riportiamo di seguito un esempio di installazone tramite riga di comando per una distribuzione che usa il comando rpm(RedHat, Fedora, Suse):
+
+%\#rpm -ivh openvpn-[details].rpm #installazione del pacchetto
+
+%\#rpm -Uvh openvpn-[details].rpm  #Upgrade del pacchetto
+
+L'installazione tramite riga di comando deve tenere conto della dipendenza dei pacchetti e nello specifico il pacchetto dipende da:
+
+\textasteriskcentered openssl
+\textasteriskcentered lzo
+\textasteriskcentered pam
+
+Installazione su Ubuntu/debian
+%\# apt-get install easy-rsa
+%\# apt-get install openvpn
+
+\section{Certificate Authority (CA)}
+
+Il primo passo da fare è la creazione di una PKI (public key infrastructure).
+ Una PKI consiste di:
+
+• un certificato separato (conosciuto come public key) e una chiave privata per il server e per ogni client
+• un certificato, una chiave,  per la Certificate Authority (CA) che viene usato per segnare ogni certificato per il server e per i client.

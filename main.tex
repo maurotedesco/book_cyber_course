@@ -1,0 +1,70 @@
+% Preambolo
+
+\documentclass[a4paper,12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+
+% Creazione indice
+\usepackage{makeidx}
+\makeindex
+
+
+% Inizio Documento 
+
+\begin{document}
+	
+% Tentativo di cambiare header e footer
+
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{1pt}
+
+
+\fancyhead[L]{{\tiny Mauro Tedesco}}
+\fancyfoot[L]{{\tiny https://www.corsilinux.academy}}
+
+
+\author{Mauro Tedesco}
+\title{Book \\
+	"Corso Tecniche di Hacking e Sicurezza delle
+	Reti IP"}
+\date{Settembre 2020}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+\include{./TeX_files/chapter00}
+\include{./TeX_files/chapter01}
+\include{./TeX_files/chapter02}
+\include{./TeX_files/chapter03}
+\include{./TeX_files/chapter04}
+\include{./TeX_files/chapter05}
+\include{./TeX_files/chapter06}
+\include{./TeX_files/chapter07}
+\include{./TeX_files/chapter08}
+\include{./TeX_files/chapter09}
+\include{./TeX_files/chapter10}
+\include{./TeX_files/chapter11}
+\include{./TeX_files/chapter12}
+\include{./TeX_files/chapter13}
+\include{./TeX_files/chapter14}
+\include{./TeX_files/chapter15}
+\include{./TeX_files/chapter16}
+\include{./TeX_files/appendix}
+
+\backmatter
+
+% bibliography, glossary and index would go here.
+
+\bibliography{Bibliografia}
+
+\printindex
+
+\end{document}
