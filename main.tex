@@ -11,6 +11,17 @@
 \usepackage{makeidx}
 \makeindex
 
+% bibliografia
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\addbibresource{Bibliografia.bib}
+
+\title{Bibliografia management: \texttt{biblatex} package}
 
 % Inizio Documento 
 
@@ -63,8 +74,8 @@
 
 % bibliography, glossary and index would go here.
 
-\bibliography{Bibliografia}
-
 \printindex
+
+\printbibliography
 
 \end{document}
