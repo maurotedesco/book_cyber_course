@@ -1,3 +1,196 @@
-\chapter{Minacce in una infrastruttura di rete}	 %capitolo 2
+\chapter{Hacking in una infrastruttura di rete}	 %capitolo 2
 
-Minacce alla sicurezza in una infrastruttura di rete 
+\section{Metodologia}
+
+Nei corsi di "Sicurezza Informatica" si insegnano metodi standard e procedure riconosciute nel mondo del lavoro, ogni organizzazione usa la propria procedura, di seguito viene proposto un metodo da seguire per  raccogliere informazioni e definire la superficie d'attacco.
+Questa superficie è la base per cercare un elenco di vulnerabilità da usare al fine di ottenere l'accesso ai sistemi. 
+L'obiettivo primario non è solo ottenere l'accesso ai sistemi ma mantenerne l'accesso.
+Per mantenere l'accesso bisogna cercare di installare un programma e per farlo spesso servono privilegi di amministratore, per questo motivo dopo il primo accesso si cerca  un modo per
+aumentare i privilegi e poter installare del software con poteri amministrativi.
+\\ La fase successiva, importante per non farsi rintracciare, prevede la cancellazione delle tracce
+in modo da non essere scoperti.
+I passi riportati sono quelli usati durante lo studio dell'hacking etico:
+
+\begin{itemize}
+    \item Raccolta Informazioni (Gathering Information)
+    \item Scansioni (Scanning)
+    \item Enumerazione  dei servizi (Enumeration)
+    \item Elenco delle Vulnerabilità (Vulnerability Assessment)
+    \item Sfruttamento delle vulnerabilità (penetration test)
+    \item Accesso al sistema
+    \item Aumentare i privilegi (Privilege Escalation)
+    \item Installazione backdoor, malware, trojan, ecc..
+    \item Cancellazione delle tracce
+
+\end{itemize}
+
+\section{Raccolta Informazioni}
+
+La raccolta delle informazioni può essere fatta in maniera \textbf{passiva} oppure \textbf{attiva}. 
+Le informazioni in maniera passiva vengono raccolte utilizzando siti web che fanno questo di mestiere. Utilizzando delle query personalizzate si ottengono informazioni preziose per l'analisi del nostro target. \\
+I siti che offrono informazioni on-line sono tanti, con il passare del tempo e con l'esperienza ognuno compila un suo elenco personalizzato. \\ Di seguito riporto quelli che vengono usati durante i miei corsi di sicurezza, insieme ai comandi di sistema.\\ 
+\\
+Comandi di sistema:
+
+\begin{itemize}
+    \item ricerche tramite ping 
+    \item ricerche tramite dns
+\end{itemize}
+Siti:
+\begin{itemize}
+    \item ricerche tramite \textbf{shodan} \cite{shodan}
+    \item analisi della storia del sito web tramite \textbf{netcraft} \cite{netcraft}
+    \item analisi della storia del sito web tramite \textbf{WaybackMachine} \cite{wayback}
+    \item esistenza di una mail usando la ricerca tramite \textbf{Centralops} \cite{centralops}.
+\end{itemize}
+
+Le informazioni raccolte  possono essere organizzate in un report o un grafico finale. Esistono dei programmi o tools  per fare questo in maniera centralizzata integrando le ricerche e le query in una unica interfaccia e presentandole in formato grafico o report.
+\\ Uno di questi è \textbf{"Maltego}"\cite{maltego} di \textbf{paterva}\cite{paterva}. 
+
+\section{ Scansioni (Scanning) }
+
+La tecnica di scansione di un Ip o di una intera rete viene effettuata per cercare le eventuali porte aperte su un sistema. Tale tecnica viene implementata sfruttando le caratteristiche del TCP/IP che prevede l'uso di flag all'interno di ogni pacchetto che viene inviato sulla rete. La conoscenza di questi flag e del protocollo TCP/IP permette di avere informazioni sulle porte aperte e sui servizi che girano su queste porte. \\
+Il software principale che viene usato per le scansioni è: \\
+\textbf{nmap}\cite{nmap} \\
+Nmap può essere usato con tutte le sue opzioni per fare dei controlli accurati e personalizzati.
+Un altro software per le scansioni è: \\
+\textbf{ hping3}\cite{hping3}.
+
+\subsection{Esempi di scansioni con Nmap}
+Si possono fare diversi tipi di scansioni usando i diversi flag del TCP/IP, \textbf{nmap}\cite{nmap}
+usa diversi flag per fare scansioni di tipo diverso.
+\begin{itemize}
+    \item Scansione Probe Only \\
+      \textbf{ \#nmap  -v -sn 192.168.1.15}
+    \item Scansione Syn scan \\
+        \textbf{ \#nmap  -v -sS 192.168.1.15}
+    \item Scansione TCP scan \\
+        \textbf{ \#nmap  -v -sT 192.168.1.15}
+    \item Scansione IDLE/ID \\
+        \textbf{ \#nmap  -v -Pn -p- -sI HostZombie 192.168.1.15} 
+    \item Scansione Version scan \\
+        \textbf{ \#nmap  -v -sV 192.168.1.15} 
+     \item Scansione con Decoy (Evading IDS) \\
+        \textbf{ \#nmap -v -D RND:20 192.168.1.15}     
+     \item Scansione con mac spoof (Evading IDS)\\
+        \textbf{ \#nmap –sS –PN –spoof-mac 0 192.168.0.30}
+    \item Scansione UDP \\
+        \textbf{ \#nmap  -v -sU 192.168.1.15}
+\end{itemize}
+
+\textbf{ Hping3}\cite{hping3} viene usato alla stregua di \textbf{nmap}\cite{nmap} per avere delle informazioni sulle porte di un server.
+%Riporto alcuni esempi di uso comune:\\
+
+\section{ Enumerazione  dei servizi (Enumeration)}
+
+L'enumerazione è quella tecnica usata per chiedere informazioni lecite ad un servizio per sapere che cosa è memorizzato in quel servizio, questo ci permette di conoscere utenti,  nome macchina, domini, stato dei servizi, versioni software, ecc.. \\
+Tutti i servizi possono essere analizzati con tecniche di enumerazione, quelli riportati di seguito sono degli esempi che potrebbero dare maggiori informazioni per le fasi successive:
+\begin{itemize}
+
+    \item servizio\textbf{ ftp porta 21} \\
+        \textbf{ \#telnet  192.168.1.15 21}
+    \item servizio \textbf{ssh porta 22} \\
+        \textbf{ \#ssh -v 192.168.1.15}
+    \item servizio \textbf{smtp porta 25} \\
+        \textbf{ \#telnet  192.168.1.15 25}
+     \item servizio \textbf{web porta 80} \\
+        \textbf{ browser http://192.168.1.15}
+    \item servizio \textbf{ldap porta 389} \\
+        \textbf{ \#ldapsearch -h [IP] -p [PORT] -x -s base}
+    \item servizio\textbf{ smb porta 139} \\
+        \textbf{ \#smbclient 192.168.1.15}
+    \item servizio\textbf{ snmp porta 161} \\
+         \textbf{ \#snmpwalk IP]}
+     \item servizio\textbf{ rpc porta 111} \\
+        rpcinfo - rpcinfo can be utilized to enumerate RPC services \\
+        \textbf{ \# rpcinfo -p [IP]}
+    \item servizio\textbf{ active directory porta 445}
+\end{itemize}
+
+
+
+\section{ Elenco delle Vulnerabilità (Vulnerability Assessment) }
+
+Dopo aver raccolto le informazioni sui servizi associati alle porte aperte e dopo aver fatto l'enumerazione di tali servizi si passa all'analisi delle vulnerabilità conosciute che quel servizio può avere.\\
+La durata dell'analisi dipende da quanti servizi e quante informazioni si sono raccolte nelle fasi precedenti.
+Il lavoro può essere svolto manualmente oppure usando dei tools che velocizzano l'analisi, spesso si procede con entrambe le modalità per cercare il maggior numero di vulnerabilità associate al target da analizzare. \\
+I tools più comuni sono:
+\begin{itemize}
+   
+  \item Nessus\cite{nessus}
+  \item Openvas \cite{openvas}
+  \item nikto\cite{nikto} per informazioni sulle vulnerabilità web, test delle sole applicazioni web.
+  \item Metasploit\cite{metasploit}, questo tools opensource ha una versione PRO a pagamento.
+\end{itemize}
+
+I tools oltre a fornire un report con le vulnerabilità trovate per ogni vulnerabilità riportano un valore di pericolosità, il CVSS ed il CVE.
+
+\subsection{CVSS}
+
+CVSS: comprendiamo di cosa si tratta.
+
+Il CVSS\cite{CVSS} è l’acronimo di Common Vulnerability Scoring System, un framework realizzato dalla FIRST\cite{First}, una organizzazione senza scopo di lucro con sede negli Stati uniti d’America ad oggi arrivato alla versione 3.1.
+
+Il framework è utilizzato per classificare le caratteristiche e la gravità dei punti deboli sfruttabili, creando un sistema di punteggio che valuta ogni singola vulnerabilità da 0 a 10.
+
+È il metodo più comunemente utilizzato per valutare le vulnerabilità presenti all'interno di un sistema software/hardware attraverso la metrica "base", anche se tale metrica può essere influenzata dai risultati di altre metriche temporali ed ambientali.
+
+Molti professionisti utilizzano il punteggio CVSS base, come metrica principale per determinare la gravità di un bug di sicurezza rilevato. 
+
+\subsection{CVE}
+
+CVE è l'acronimo di 
+
+\subsection{Esempi di uso di Nikto}
+
+\begin{itemize}
+
+\item Scansione con senplice con Nikto \\
+        \textbf{ \#nikto -h 192.168.1.15} \\
+        scansione semplice dell'host 192.168.1.15
+\end{itemize}
+
+\section{  Sfruttamento delle vulnerabilità (penetration test) }
+
+Il lavoro di "Vulnerability Assessment" si occupa della rilevazione delle vulnerabilità, il passo successivo invece si occupa di usare le vulnerabilità con i relativi POC per testare se queste sono effettivamente presenti e se possono essere usate per accedere al sistema. L'elenco delle vulnerabilità sono la lista delle armi a nostra disposizione per cercare di effettuare l'accesso al sistema.\\ 
+Una vulnerabilità può essere sfruttata, per esempio, per leggere l'elenco degli utenti del sistema e per cercare file con dati sensibili. Un file con dati sensibili potrebbe essere un \texttt{file excel con le password} per esempio. \\ 
+A questo punto nasce il dubbio: "avendo l'elenco dei servizi e delle vulnerabilità trovate nei punti precedenti, dove si può cercare se esistono dei POC o degli exploit già pronti?" \\
+La risposta è: "sui siti di exploit conosciuti, o all'interno dei tools che abbiamo visto prima". \\\textbf{ Metasploit}\cite{metasploit} è una suite con un elenco di vulnerabilità da testare e una lista di  paylod ed exploit già pronti per essere usati per tentare di guadagnare l'accesso ai sistemi. \\
+Un'altra ottima risorsa è il sito\textbf{ explot-db}\cite{explot-db} dove un motore di ricerca aiuta nell'individuare le vulnerabilità ed i relativi POC.
+
+\section{ Accesso al sistema }
+
+L'accesso al sistema, che si ottiene con le vulnerabilità trovate prima, non sempre è un accesso con permessi di amministrazione.\\
+Il software che abbiamo sfruttato con la sua vulnerabilità ci farà accedere al sistema con i privilegi con cui stava girando come processo.\\
+L'accesso, anche con privilegi bassi, ci fornisce la possibilità di fare ulteriori ricerche sul sistema per cercare informazioni e altre vulnerabilità che da remoto non sono accessibili.
+Il primo accesso è importante, questo ci fornisce una strada per allargare la superficie d'attacco e per aumentare la conoscenza del target.
+Dopo aver guadagnato l'accesso al sistema usiamo tutte le nostre conoscenze per cercare informazioni da poter usare per lo step successivo.
+
+
+\section{  Aumentare i privilegi (Privilege Escalation) }
+
+Cercare ulteriori metodi per accedere con privilegi superiori, uso di vulnerabilità locali  al sistema operativo oppure iniezioni di codice che manda in  errore un elemento del sistema operativo fino ad avere accesso a sessioni come amministratore. I metodi da usare sono tanti, la conoscenza e lo studio del sistema operativo deve essere elevata, non c'è una sola strada da percorrere e bisogna fare tanti tentativi. 
+Proviamo a fare un elenco di cose da controllare, con la consapevolezza che l'elenco può non essere esaustivo:\\
+\begin{itemize}
+   
+  \item Cercare programmi installati con bug
+  \item Cercare programmi che girano con setuid
+  \item Cercare programmi che girano con setgid
+  \item Controllare i sudoers
+  \item Cercare servizi locali con vulnerabilità note
+  \item Cercare file con backup 
+  \item Cercare file personali contenenti informazioni (File History, Pofili, ecc..)
+  \item Controllare la lista utenti
+  
+\end{itemize}
+
+\section{  Installazione backdoor, malware, trojan, ecc..}
+
+A questo punto se abbiamo guadagnato l'accesso come amministratore si hanno le autorizzazioni per installare software sul sistema all'insaputa del proprietario, degli amministratori e sopratutto per farlo eseguire in automatico al prossimo riavvio. Questo permette di instaurare un canale di accesso preferenziale non controllabile per accedere in maniera nascosta saltando tutti i controlli di sicurezza. \\
+L'elenco delle backdor che si possono installare sono tante e dipende dal software a disposizione e dal Sistema Operativo in oggetto.
+
+\section{  Cancellazione delle tracce}
+
+\textbf{Metasploit}\cite{metasploit} ha nell'elenco dei comandi una voce "ClearEvent", questa permette di cancellare le tracce in modo che non si possa risalire all'attacco e a ciò che si è fatto sul sistema.\\
+Attaccanti più scrupolosi procedono manualmente  a modificare o cancellare log di sistema, eventi e tracce che permettono di risalire all'origine dell'attacco.\\
+Gli attacchi più sofisticati durano diversi giorni e una prerogativa di questi attacchi sono il non lasciare tracce, sopratutto per non risalire a cosa è stato fatto o installato su un sitema.
