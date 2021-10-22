@@ -1,0 +1,101 @@
+\chapter{Intrusion detection (ids) e prevention (ips)}  %capitolo 8
+
+Un attacco deve essere rilevato con degli strumenti che segnalano degli eventi, valutato attraverso un'analisi degli eventi segnalati e scaturire un incidente di sicurezza dove vengono riportate le diverse anomalie riscontrate.
+Tutto questo deve essere di aiuto agli esperti che possano prendere delle decisioni su come comportarsi e quali azioni intraprendere.
+
+\subsection{Attacchi}
+Interni
+esterni
+
+\subsection{Eventi}
+Piattaforme di Rilevamento
+(NIDS, HIDS, Correlatori, Anti-Virus, Firewall, Log,)
+
+\subsection{Incidenti}
+
+Anomalie di rete
+Anomalie di Sistema
+Anomalie di Infrastruttura
+Notifiche Dirette
+Indicatori Fisici
+Indicatori di Business
+
+Un IDS non si sostituisce ai normali controlli, ma piuttosto cerca di scoprire i loro fallimenti
+Chi entra in un sistema informatico abusivamente compie alcuni tipi di azione che un utente normale non farebbe mai; identificando queste azioni “anomale” possiamo scoprire un intruso
+Due metodi principali per farlo:
+Anomaly Detection: determinare statisticamente modelli di “comportamento normale”, e segnalare eventuali deviazioni “significative”; conoscenza a posteriori
+Misuse Detection: confrontare gli eventi con “schemi” predefiniti di attacchi; conoscenza a priori
+
+I Firewall loggano traffico basandosi su Source/Destination IP/Port e trattano ogni pacchetto come evento individuale (escludendo la tecnologia Statefull inspection)
+Risultato: molti dati, molte segnalazioni irrilevanti per stimare le intrusioni in corso
+Gli IDS esaminano il payload applicativo dei pacchetti effettuando una serie di analisi per determinare la presenza di traffico anomalo
+Risultato: meno eventi = meno falsi positivi = maggiore efficacia
+
+\subsection{Posizionamento}
+
+Esternamente al firewall
+Individuano gli attacchi diretti verso la propria rete
+Effettivamente rilevano un maggior numero di eventi
+Generano una maggior quantità di logs
+
+Internamente rispetto al firewall
+Controllano solo ciò che il firewall lascia passare (verso l’interno)
+
+\subsection{Network based Vs. Host Based}
+
+HOST based: i primi IDS erano host-based; un IDS host-based si appoggia al sistema operativo e controlla le system call (esecuzione e controllo dei processi) e gli accessi (al sistema, ai device…)
+NETWORK based: controllano il traffico sulla rete cercando nel flusso di pacchetti le tracce di una intrusione
+Prossima frontiera: interoperabilità, correlazione, normalizzazione, AI/ML
+Entrambi possono essere Anomaly o Misuse based.
+
+NETWORK
+Caratteristiche
+Gli NIDS esaminano pacchetti raw nella rete in modo passivo e generano eventi
+
+Vantaggi
+Facilmente dispiegabile
+Non intrusivo
+Estremamente difficile da evadere
+
+Svantaggi
+Non riconosce traffico criptato
+Non riconosce il traffico intra-lan
+
+HOST
+Caratteristiche
+Funziona su un singolo host
+Puo’ analizzare audit, log, integrità di file e directory ecc.
+Vantaggi
+Funzionamento più accurato di un NIDS
+Minor volume di traffico e quindi minor mole di lavoro
+Svantaggi
+Dispiegamento costoso
+Cosa accade se l’host è compromesso?
+
+
+
+\subsection{Signature}
+
+Caratteristiche
+Confronta con pattern già noti
+per verificare l’attacco
+Vantaggi
+Molto diffuso
+Molto veloce
+Facile da implementare
+Svantaggi
+Non puo’ intercettare attacchi per I quali non sono disponibili firme d’attacco
+
+\subsection{Anomaly}
+
+Caratteristiche
+ Usa modelli statistichi o motori di apprendimento per individuare comportamenti legittimi
+ Riconosce le intrusioni a partire da quelle normali a finire a quelle potenziali
+  Vantaggi
+ Puo’ individuare tentativi di exploit nuovi e vulnerabilità non ancora note.
+ Può riconoscere usi autorizzati che cascano al di fuori della norma
+  Svantaggi
+ Generalmente più lento, più oneroso in termini di risosrse paragonato a un signature-based IDS
+Maggiore complessità e di difficile configurazione
+Maggiore percentuale di falsi allarmi
+

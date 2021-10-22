@@ -2,14 +2,13 @@
 
 \section{Metodologia}
 
-Nei corsi di "Sicurezza Informatica" si insegnano metodi standard e procedure riconosciute nel mondo del lavoro, ogni organizzazione usa la propria procedura, di seguito viene proposto un metodo da seguire per  raccogliere informazioni e definire la superficie d'attacco.
+Nei corsi di "Sicurezza Informatica" si insegnano metodi standard e procedure riconosciute nel mondo del lavoro, ogni organizzazione usa la propria procedura. I passi riportati sono quelli usati durante lo studio dell'hacking etico, viene proposto un metodo da seguire per  raccogliere informazioni e definire la superficie d'attacco.
 Questa superficie è la base per cercare un elenco di vulnerabilità da usare al fine di ottenere l'accesso ai sistemi. 
-L'obiettivo primario non è solo ottenere l'accesso ai sistemi ma mantenerne l'accesso.
+L'obiettivo primario non è solo ottenere l'accesso ai sistemi ma mantenerne l'accesso o esfiltrare dei dati.
 Per mantenere l'accesso bisogna cercare di installare un programma e per farlo spesso servono privilegi di amministratore, per questo motivo dopo il primo accesso si cerca  un modo per
 aumentare i privilegi e poter installare del software con poteri amministrativi.
-\\ La fase successiva, importante per non farsi rintracciare, prevede la cancellazione delle tracce
-in modo da non essere scoperti.
-I passi riportati sono quelli usati durante lo studio dell'hacking etico:
+\\ La fase successiva, importante per non farsi rintracciare, prevede la cancellazione delle tracce in modo da non essere rilevati dall'analisi post-attacco.
+
 
 \begin{itemize}
     \item Raccolta Informazioni (Gathering Information)
@@ -123,24 +122,6 @@ I tools più comuni sono:
   \item Metasploit\cite{metasploit}, questo tools opensource ha una versione PRO a pagamento.
 \end{itemize}
 
-I tools oltre a fornire un report con le vulnerabilità trovate per ogni vulnerabilità riportano un valore di pericolosità, il CVSS ed il CVE.
-
-\subsection{CVSS}
-
-CVSS: comprendiamo di cosa si tratta.
-
-Il CVSS\cite{CVSS} è l’acronimo di Common Vulnerability Scoring System, un framework realizzato dalla FIRST\cite{First}, una organizzazione senza scopo di lucro con sede negli Stati uniti d’America ad oggi arrivato alla versione 3.1.
-
-Il framework è utilizzato per classificare le caratteristiche e la gravità dei punti deboli sfruttabili, creando un sistema di punteggio che valuta ogni singola vulnerabilità da 0 a 10.
-
-È il metodo più comunemente utilizzato per valutare le vulnerabilità presenti all'interno di un sistema software/hardware attraverso la metrica "base", anche se tale metrica può essere influenzata dai risultati di altre metriche temporali ed ambientali.
-
-Molti professionisti utilizzano il punteggio CVSS base, come metrica principale per determinare la gravità di un bug di sicurezza rilevato. 
-
-\subsection{CVE}
-
-CVE è l'acronimo di 
-
 \subsection{Esempi di uso di Nikto}
 
 \begin{itemize}
@@ -149,6 +130,46 @@ CVE è l'acronimo di
         \textbf{ \#nikto -h 192.168.1.15} \\
         scansione semplice dell'host 192.168.1.15
 \end{itemize}
+
+I tools oltre a fornire un report con le vulnerabilità trovate per ogni vulnerabilità riportano un valore di pericolosità, il CVSS ed il CVE.
+
+\subsection{CVSS}
+
+CVSS: comprendiamo di cosa si tratta.
+
+Il CVSS\cite{CVSS} è l’acronimo di Common Vulnerability Scoring System, un framework (ad oggi arrivato alla versione 3.1) realizzato dalla FIRST\cite{First}, una organizzazione senza scopo di lucro con sede negli Stati uniti d’America.
+
+Il framework è utilizzato per classificare le caratteristiche e la gravità delle vulnerabilità e delle debolezze software, creando un sistema di punteggio che valuta ogni singola vulnerabilità da 0 a 10.
+
+È il metodo più comunemente utilizzato per valutare le vulnerabilità presenti all'interno di un sistema software/hardware attraverso la metrica "base", anche se tale metrica può essere influenzata dai risultati di altre metriche temporali ed ambientali.
+
+Molti professionisti utilizzano il punteggio CVSS base, come metrica principale per determinare la gravità di un bug di sicurezza rilevato. 
+
+\subsection{CVE}
+
+CVE è l'acronimo di "Common Vulnerabilities and Exposures", è un elenco di falle di sicurezza in ambito informatico divulgate pubblicamente. Quando qualcuno fa riferimento a un CVE, significa riportare una falla di sicurezza a cui è stato assegnato un numero "ID CVE".
+
+
+\subsubsection{Come funziona il sistema CVE?}
+Il sistema CVE è supervisionato dalla società MITRE\cite{MITRE}, che è una Corporation finanziata dalla "Cybersecurity and Infrastructure Security Agency", parte del Dipartimento della sicurezza interna degli Stati Uniti (Homeland Security).
+
+Le voci CVE sono brevi. Non includono dati tecnici o informazioni su rischi, impatti e correzioni. Questi dettagli vengono visualizzati in altri database, tra cui il National Vulnerability Database (NVD) degli Stati Uniti, il database delle note sulle vulnerabilità del CERT/CC e vari elenchi gestiti da fornitori e altre organizzazioni. Attraverso questi diversi sistemi, gli ID CVE offrono agli utenti un modo affidabile per distinguere un unico difetto di sicurezza da un altro.
+
+\subsubsection{CVE and NVD Relationship\cite{MITRE}}
+
+CVE e NVD sono due programmi separati
+
+L'elenco CVE è stato lanciato dal MITRE nel 1999 con il contributo della community e il National Vulnerability Database (NVD) è stato lanciato dal National Institute of Standards and Technology (NIST) nel 2005.
+
+\begin{itemize}
+\item CVE - Un elenco di record, ciascuno contenente un numero di identificazione, una descrizione e almeno un riferimento pubblico, per vulnerabilità di sicurezza informatica pubblicamente note. I record CVE sono utilizzati in numerosi prodotti e servizi di sicurezza informatica di tutto il mondo, incluso NVD.
+\item NVD - Un database delle vulnerabilità costruito e completamente sincronizzato con l'elenco CVE in modo che qualsiasi aggiornamento a CVE venga visualizzato immediatamente in NVD.
+\item Relazione: l'elenco CVE alimenta NVD, che quindi si basa sulle informazioni incluse nei record CVE per fornire informazioni avanzate per ciascun record come informazioni sulle correzioni, punteggi di gravità e valutazioni di impatto. Come parte delle sue informazioni avanzate, NVD fornisce anche funzionalità di ricerca avanzate come per sistema operativo; per nome del fornitore, nome del prodotto e/o numero di versione; e per tipo di vulnerabilità, gravità, gamma di exploit correlati e impatto.
+
+\item Sebbene separati, sia CVE che NVD sono sponsorizzati dalla Cybersecurity and Infrastructure Security Agency (CISA) del Department of Homeland Security (DHS) degli Stati Uniti ed entrambi sono disponibili al pubblico e gratuiti.
+\end{itemize} 
+
+
 
 \section{  Sfruttamento delle vulnerabilità (penetration test) }
 

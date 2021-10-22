@@ -1,0 +1,55 @@
+\chapter{Tipi di attacchi}	 %capitolo 4
+
+I tpi di attacchipiù comuni sono:\\
+
+% 7 Layer ISO/OSI
+\begin{tabular}{|c|c|c|c|}
+	\hline 
+	7& applicazioni &  &  \\ 
+	\hline 
+	6& Session &  &  \\ 
+	\hline 
+	5& Presentation &  &  \\ 
+	\hline 
+	4& IP  &  &  \\ 
+	\hline 
+	3& TCP &  &  \\ 
+	\hline 
+	2&  Mac&  &  \\ 
+	\hline 
+	1& Fisico &  &  \\ 
+	\hline 
+\end{tabular} \\
+
+4 Layer per il TCP/IP \\
+
+% 4 Layer TCP/IP
+\begin{tabular}{|c|c|c|c|}
+	\hline 
+	4& Applicazione &  &  \\ 
+	\hline 
+	3& IP &  &  \\ 
+	\hline 
+	2&  TCP&  &  \\ 
+	\hline 
+	1& Fisico &  &  \\ 
+	\hline 
+\end{tabular} 
+\subsection{IP Spoofing}
+
+Ogni postazione puo’ inviare pacchetti spacciandosi per un indirizzo IP qualunque.
+ I Reply saranno ruotati alla subnet appropriata
+ Routing asimmetrico
+ Gli attaccanti potrebbero cosi’ non ottenere risposta se la vittima risiede su una subnet diversa.
+Per alcuni attacchi questo non e’ importante
+ Analogie
+ Nessuno vi impedisce di inviare lettere con indirizzo mittente diverso dal vostro.
+ 
+ \subsection{Difendersi da "IP Spoofing"}
+ 
+ Filtrare I pacchetti in ingresso
+ Impedire l’acesso a pacchetti provenienti con indirizzo di broadcast in destinazione verso la propria rete
+ Impedire l’accesso ai pacchetti provenienti da reti non ruotabili o private.
+Egress filtering
+ Impedire agli host della propria rete di spoofare il proprio indirizzo IP per I pacchetti verso le altre reti
+Impedire i broadcast verso l’esterno

@@ -1,0 +1,71 @@
+\chapter{Tecniche di firewalling}  %capitolo 7
+
+Isola la rete interna di una organizzazione da Internet o reti esterne, consentendo il transito solo a determinati servizi.
+
+Due tipologie di firewall:
+packet filter
+application gateways
+
+Per prevenire attacchi DoS
+
+Per prevenire modifiche illegali a dati
+interni.
+
+Per impedire agli aggressori di
+raccogliere informazioni riservate
+
+
+Regole di Accesso
+Usare il logging
+DROP di tutto tranne quello che server
+Regole puntuali
+Poche regole 
+\subsection{ Firewall per ridurre informazioni}
+Ignorare
+L'ICMP
+richieste in Broadcasting
+DROP porte chiuse
+Modifica banner dei servizi
+
+\subsection{Packet Filter}
+
+La rete interna è collegata a Internet con un router.
+Alcune case produttrici di router prevedono moduli opzionali per filtrare i pacchetti sulla base di:
+
+Indirizzo IP sorgente
+Indirizzo IP destinazione
+Porte TCP/UDP (sorgente/destinazione)
+ICMP message type
+TCP SYN e ACK bits
+
+\subsection{ Statefull filter}
+
+Il pacchetto viene prelevato fra il livello 2 della scheda di rete ed il livello di rete
+L’intero pacchetto viene analizzato e sono memorizzate tutte le informazioni utili per i controlli successivi
+Nell’applicare l’analisi ai pacchetti successivi si utilizzano le informazioni memorizzate.
+ 
+ 
+ \subsection{Limitazione Firewall}
+ 
+ IP spoofing: I router non possono sapere se i dati provengono realmente dalla sorgente dichiarata
+
+Diverse applicazioni hanno bisogno ciascuna del poprio gatweway applicativo.
+
+I software client devono conoscere il metodo per accedere al gateway applicativo.
+Es, deve essere impostato l’indirizzo del proxy all’interno del browser
+
+\begin{itemize}
+    \item Il traffico malizioso che transita su porte aperte non viene ispezionato dai firewall non applicativi
+
+     \item Tutto il traffico che transita attraverso un tunnel criptato non può essere analizzato
+
+    \item Dopo che una rete è stata penetrata il traffico anomalo appare come legittimo.
+
+     \item Non fornisce protezione da utenti o amministratori che accidentalmente installano virus
+
+   \item Non fornisce protezione se vengono utilizzate password amministrative deboli oppure vengono utilizzati protocolli che transitano in chiaro
+   
+   
+\end{itemize}
+
+
