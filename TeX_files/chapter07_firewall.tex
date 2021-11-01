@@ -1,31 +1,16 @@
-\chapter{Tecniche di firewalling}  %capitolo 7
+\chapter{Firewall e tecniche di firewalling}  %capitolo 7
 
-Isola la rete interna di una organizzazione da Internet o reti esterne, consentendo il transito solo a determinati servizi.
+\section{Che cosa è un firewall? }
+Partiamo dal significato della parola introdotta in informatica come similitudine di quel muro che separa le case di legno per evitare il propagarsi di un incendio.
+Il firewall è un muro di mattoni che separa due costruzioni isolandole in caso di incendio, un "muro tagliafuoco". In informatica il firewall isola una rete da un'altra; la rete interna di una organizzazione da Internet o da reti esterne, consentendo il transito solo a determinati servizi.
 
-Due tipologie di firewall:
-packet filter
-application gateways
+\section{Tipologie di firewall}
 
-Per prevenire attacchi DoS
-
-Per prevenire modifiche illegali a dati
-interni.
-
-Per impedire agli aggressori di
-raccogliere informazioni riservate
-
-
-Regole di Accesso
-Usare il logging
-DROP di tutto tranne quello che server
-Regole puntuali
-Poche regole 
-\subsection{ Firewall per ridurre informazioni}
-Ignorare
-L'ICMP
-richieste in Broadcasting
-DROP porte chiuse
-Modifica banner dei servizi
+\begin{itemize}
+    \item packet filter
+    \item application gateways
+    \item statefull inspection
+\end{itemize}
 
 \subsection{Packet Filter}
 
@@ -44,8 +29,34 @@ Il pacchetto viene prelevato fra il livello 2 della scheda di rete ed il livello
 L’intero pacchetto viene analizzato e sono memorizzate tutte le informazioni utili per i controlli successivi
 Nell’applicare l’analisi ai pacchetti successivi si utilizzano le informazioni memorizzate.
  
+
+\section{Utilizzo}
+\begin{itemize}
+    \item Per prevenire attacchi DoS
+    \item Per prevenire modifiche illegali a dati interni.
+    \item Per impedire agli aggressori di raccogliere informazioni riservate
+\end{itemize}
+
+
+
+
+\section{Regole di Accesso}
+Usare il logging
+DROP di tutto tranne quello che server
+Regole puntuali
+Poche regole 
+\section{ Firewall per ridurre informazioni}
+Ignorare
+L'ICMP
+richieste in Broadcasting
+DROP porte chiuse
+Modifica banner dei servizi
+
+
+
+
  
- \subsection{Limitazione Firewall}
+ \section{Limitazione Firewall}
  
  IP spoofing: I router non possono sapere se i dati provengono realmente dalla sorgente dichiarata
 

@@ -1,27 +1,31 @@
-\chapter{Intrusion detection (ids) e prevention (ips)}  %capitolo 8
+\chapter{Intrusion detection (ids) e Intrusion prevention (ips)}  %capitolo 8
 
 Un attacco deve essere rilevato con degli strumenti che segnalano degli eventi, valutato attraverso un'analisi degli eventi segnalati e scaturire un incidente di sicurezza dove vengono riportate le diverse anomalie riscontrate.
 Tutto questo deve essere di aiuto agli esperti che possano prendere delle decisioni su come comportarsi e quali azioni intraprendere.
 
-\subsection{Attacchi}
+\section{Attacchi}
 Interni
 esterni
 
-\subsection{Eventi}
+\section{Eventi}
 Piattaforme di Rilevamento
 (NIDS, HIDS, Correlatori, Anti-Virus, Firewall, Log,)
 
-\subsection{Incidenti}
+\section{Incidenti}
 
-Anomalie di rete
-Anomalie di Sistema
-Anomalie di Infrastruttura
-Notifiche Dirette
-Indicatori Fisici
-Indicatori di Business
+\begin{itemize}
+    \item Anomalie di rete
+    \item Anomalie di Sistema
+    \item Anomalie di Infrastruttura
+    \item Notifiche Dirette
+    \item 
+    
+\end{itemize}
 
-Un IDS non si sostituisce ai normali controlli, ma piuttosto cerca di scoprire i loro fallimenti
+
+Un IDS non si sostituisce ai normali controlli, ma piuttosto cerca di scoprire i loro fallimenti.
 Chi entra in un sistema informatico abusivamente compie alcuni tipi di azione che un utente normale non farebbe mai; identificando queste azioni “anomale” possiamo scoprire un intruso
+
 Due metodi principali per farlo:
 Anomaly Detection: determinare statisticamente modelli di “comportamento normale”, e segnalare eventuali deviazioni “significative”; conoscenza a posteriori
 Misuse Detection: confrontare gli eventi con “schemi” predefiniti di attacchi; conoscenza a priori
@@ -31,7 +35,7 @@ Risultato: molti dati, molte segnalazioni irrilevanti per stimare le intrusioni 
 Gli IDS esaminano il payload applicativo dei pacchetti effettuando una serie di analisi per determinare la presenza di traffico anomalo
 Risultato: meno eventi = meno falsi positivi = maggiore efficacia
 
-\subsection{Posizionamento}
+\section{Posizionamento}
 
 Esternamente al firewall
 Individuano gli attacchi diretti verso la propria rete
@@ -41,12 +45,14 @@ Generano una maggior quantità di logs
 Internamente rispetto al firewall
 Controllano solo ciò che il firewall lascia passare (verso l’interno)
 
-\subsection{Network based Vs. Host Based}
+\section{Network based Vs. Host Based}
 
 HOST based: i primi IDS erano host-based; un IDS host-based si appoggia al sistema operativo e controlla le system call (esecuzione e controllo dei processi) e gli accessi (al sistema, ai device…)
 NETWORK based: controllano il traffico sulla rete cercando nel flusso di pacchetti le tracce di una intrusione
-Prossima frontiera: interoperabilità, correlazione, normalizzazione, AI/ML
 Entrambi possono essere Anomaly o Misuse based.
+
+Evoluzione: interoperabilità, correlazione, normalizzazione, AI/ML
+
 
 NETWORK
 Caratteristiche
@@ -74,7 +80,7 @@ Cosa accade se l’host è compromesso?
 
 
 
-\subsection{Signature}
+\section{Signature}
 
 Caratteristiche
 Confronta con pattern già noti
@@ -86,7 +92,7 @@ Facile da implementare
 Svantaggi
 Non puo’ intercettare attacchi per I quali non sono disponibili firme d’attacco
 
-\subsection{Anomaly}
+\section{Anomaly}
 
 Caratteristiche
  Usa modelli statistichi o motori di apprendimento per individuare comportamenti legittimi
